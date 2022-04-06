@@ -1,4 +1,6 @@
 import styled from 'styled-components';
+import { TextField,InputAdornment, IconButton} from '@mui/material';  
+import VisibilityOff from '@mui/icons-material/VisibilityOff';
 
 const Button = styled.button`
 background: transparent;
@@ -26,22 +28,7 @@ const EyeIcon = styled.i`
 cursor: pointer;
 `;
 
-const TextField = styled.div`
-border: 1px solid;
-font-weight: 400;
-font-size: 1rem;
-line-height: 1.4375em;
-letter-spacing: 0.00938em;
-color: rgba(0, 0, 0, 0.87);
-box-sizing: border-box;
-cursor: text;
-display: inline-flex;
--webkit-box-align: center;
-align-items: center;
-position: relative;
-border-radius: 4px;
-padding-right: 14px;
-`;
+
 const Input = styled.input`
 border: none;
 &:focus {
@@ -63,15 +50,19 @@ function App() {
   return (
     <LoginForm>
       <Input error="error" placeholder="username" />
-      <TextField class="input-container">
-        <Input placeholder="password" />
-      </TextField>
-      <TextField style={{display: "flex"}}>
-        <Input placeholder='password'/>
-        <ButtonIcon>
-          <i class="far fa-eye" id="togglePassword" ></i>
-        </ButtonIcon>
-      </TextField>
+      <TextField
+          label="password"
+          id="outlined-start-adornment"
+          variant="outlined"
+          sx={{ m: 1, width: '25ch' }}
+          InputProps={{
+            endAdornment: <InputAdornment position="end">
+              <IconButton>
+                <VisibilityOff/>
+              </IconButton>
+            </InputAdornment>,
+          }}
+        />
       <Button>Log In</Button>
     </LoginForm>
   );
