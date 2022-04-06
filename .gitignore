@@ -1,0 +1,37 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+/node_modules
+/.pnp
+.pnp.js
+
+# testing
+/coverage
+
+# production
+/build
+
+# misc
+.DS_Store
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+wint-assignment/node_modules/@ampproject/remapping/LICENSE
+wint-assignment/node_modules/@ampproject/remapping/package.json
+wint-assignment/node_modules/@ampproject/remapping/README.md
+wint-assignment/node_modules/@ampproject/remapping/dist/remapping.mjs
+wint-assignment/node_modules/@ampproject/remapping/dist/remapping.mjs.map
+wint-assignment/node_modules/@ampproject/remapping/dist/remapping.umd.js
+wint-assignment/node_modules/@ampproject/remapping/dist/remapping.umd.js.map
+wint-assignment/node_modules/@ampproject/remapping/dist/types/build-source-map-tree.d.ts
+wint-assignment/node_modules/@ampproject/remapping/dist/types/fast-string-array.d.ts
+wint-assignment/node_modules/@ampproject/remapping/dist/types/original-source.d.ts
+wint-assignment/node_modules/@ampproject/remapping/dist/types/remapping.d.ts
+wint-assignment/node_modules/@ampproject/remapping/dist/types/source-map-tree.d.ts
+wint-assignment/node_modules/@ampproject/remapping/dist/types/source-map.d.ts
+wint-assignment/node_modules/@ampproject/remapping/dist/types/types.d.ts

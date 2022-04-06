@@ -1,2 +1,0 @@
-# wint-assignment
-  
