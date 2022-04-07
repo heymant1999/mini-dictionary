@@ -1,5 +1,5 @@
 import { Navigate, useRoutes } from 'react-router-dom';
-import {Home} from './Home';
+import {Dashboard} from './Dashboard';
 import { LoginForm } from './LoginForm';
 
 export  function Router() {
@@ -13,8 +13,8 @@ export  function Router() {
       element: <LoginForm />,
     },
     {
-      path: '/home',
-      element: <Home/>
+      path: '/dashboard',
+      element: <Dashboard/>
     }
   ]);
 }
