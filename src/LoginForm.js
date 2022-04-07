@@ -1,3 +1,4 @@
+import { useState } from "react";
 import {
   TextField,
   InputAdornment,
@@ -8,6 +9,7 @@ import {
   Typography,
 } from "@mui/material";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
+import VisibilityIcon from "@mui/icons-material/Visibility";
 import EmailIcon from "@mui/icons-material/Email";
 import { grey } from "@mui/material/colors";
 import { useFormik } from "formik";
@@ -16,6 +18,7 @@ import { useNavigate } from "react-router-dom";
 import { CustomContainer, CustomPaper } from "./layout/components";
 
 export function LoginForm() {
+  const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
   const loginData = {
     email: "",
@@ -37,6 +40,7 @@ export function LoginForm() {
     validationSchema: loginDataSchema,
     onSubmit: () => {
       localStorage.setItem("USER", JSON.stringify(formik.values));
+      navigate("/dashboard");
     },
   });
 
@@ -48,6 +52,7 @@ export function LoginForm() {
           <Grid item xs={12} md={4}>
             <TextField
               size="small"
+              type="email"
               {...formik.getFieldProps("email")}
               error={Boolean(formik.touched.email && formik.errors.email)}
               helperText={formik.touched.email && formik.errors.email}
@@ -68,17 +73,23 @@ export function LoginForm() {
           <TextField
             size="small"
             fullWidth
+            type={showPassword ? "text" : "password"}
             {...formik.getFieldProps("password")}
             label="password"
-            id="outlined-start-adornment"
+            id="outlined-start-adornment2"
             variant="outlined"
             error={Boolean(formik.touched.password && formik.errors.password)}
             helperText={formik.touched.password && formik.errors.password}
             InputProps={{
               endAdornment: (
                 <InputAdornment position="end">
-                  <IconButton style={{ color: grey[500] }}>
-                    <VisibilityOff />
+                  <IconButton
+                    onClick={(e) => {
+                      setShowPassword(!showPassword);
+                    }}
+                    style={{ color: grey[500] }}
+                  >
+                    {showPassword ? <VisibilityIcon /> : <VisibilityOff />}
                   </IconButton>
                 </InputAdornment>
               ),

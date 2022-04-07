@@ -5,8 +5,10 @@ import {
   Grid,
   Typography,
   LinearProgress,
+  InputAdornment,
   Box,
 } from "@mui/material";
+import SearchIcon from "@mui/icons-material/Search";
 import { grey } from "@mui/material/colors";
 import { useEffect, useState } from "react";
 import axios from "axios";
@@ -42,7 +44,7 @@ export function Dashboard() {
 
   const getWordMeaning = async (word) => {
     setShowSuggestions(false);
-    setSearchText(word);
+    setSearchText(word || "");
     setLoading(true);
     axios
       .get(`https://api.dictionaryapi.dev/api/v2/entries/en/${word}`)
@@ -68,6 +70,25 @@ export function Dashboard() {
     );
   };
 
+  const handleKeyUp = (ev) => {
+    if (ev.key === "Enter") {
+      setSearchText(suggestions.find((s) => s.isSelected)?.words || "");
+      getWordMeaning(suggestions.find((s) => s.isSelected)?.word || "");
+      setShowSuggestions(false);
+      ev.preventDefault();
+    }
+    if (ev.key === "ArrowUp") {
+      let index = suggestions.indexOf(suggestions.find((s) => s.isSelected));
+      index = Math.max(index - 1, 0);
+      setSelected(index);
+    }
+    if (ev.key === "ArrowDown") {
+      let index = suggestions.indexOf(suggestions.find((s) => s.isSelected));
+      index = Math.min(index + 1, 4);
+      setSelected(index);
+    }
+  };
+
   return (
     <CustomContainer>
       <CustomPaper justifyContent="center" alignItems="start">
@@ -76,42 +97,19 @@ export function Dashboard() {
             <TextField
               size="small"
               onChange={(e) => {
-                setSearchText(e.target.value);
+                setSearchText(e.target.value.toLowerCase() || "");
               }}
               value={searchText}
               sx={{ borderBlockColor: "red" }}
-              label="search"
               fullWidth
               variant="outlined"
-              onKeyUp={(ev) => {
-                if (ev.key === "Enter") {
-                  setSearchText(suggestions.find((s) => s.isSelected).word);
-                  getWordMeaning(suggestions.find((s) => s.isSelected).word);
-                  setShowSuggestions(false);
-                  ev.preventDefault();
-                }
-                if (ev.key === "ArrowUp") {
-                  let index = suggestions.indexOf(
-                    suggestions.find((s) => s.isSelected)
-                  );
-                  if (index > 0) {
-                    index -= 1;
-                  } else {
-                    index = 0;
-                  }
-                  setSelected(index);
-                }
-                if (ev.key === "ArrowDown") {
-                  let index = suggestions.indexOf(
-                    suggestions.find((s) => s.isSelected)
-                  );
-                  if (index < 4) {
-                    index += 1;
-                  } else {
-                    index = 4;
-                  }
-                  setSelected(index);
-                }
+              onKeyUp={handleKeyUp}
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="end">
+                    {!searchText && <SearchIcon style={{ color: grey[500] }} />}
+                  </InputAdornment>
+                ),
               }}
             />
             {loading && (
@@ -137,9 +135,10 @@ export function Dashboard() {
 
 function Suggestions({ suggestions, getWordMeaning, setSelected }) {
   return (
-    <Stack container spacing={0.5}>
+    <Stack spacing={0.5}>
       {suggestions.map((s, index) => (
         <Li
+          key={index}
           onMouseOver={() => setSelected(index)}
           backgroundColor={s.isSelected && "#3A3845"}
           onClick={(e) => getWordMeaning(s.word)}
@@ -152,5 +151,5 @@ function Suggestions({ suggestions, getWordMeaning, setSelected }) {
 }
 
 function WordMeaning({ meaning, loading }) {
-  return loading ? <p>..loading</p> : <p>{meaning}</p>;
+  return loading ? <p> </p> : <p>{meaning}</p>;
 }
