@@ -1,9 +1,9 @@
-import { Container } from '@mui/material';
+import { Container , CssBaseline } from '@mui/material';
 import { purple, deepOrange, grey, green, blue } from '@mui/material/colors';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { ThemeContext } from 'styled-components';
 import { LoginForm } from './LoginForm';
-import {Router} from './routes';
+import { Router } from './routes';
 
 const theme = createTheme({
   palette: {
@@ -12,20 +12,29 @@ const theme = createTheme({
     divider: deepOrange[700],
     background: {
       default: deepOrange[900],
-       paper: grey[900],
+      paper: grey[900],
     },
     text: {
       primary: '#fff',
       secondary: grey[500],
     },
     actions: {
-      default : '#fff'
+      default: '#fff'
     },
     icon: {
       color: green[100],
     },
   },
-  
+  components: {
+    MuiTextField: {
+      // styleOverrides: {
+      //   root: {
+      //     borderBlockColor:'red',
+      //     border:'solid 4px',
+      //   },
+      // },
+    },
+  },
 },
 );
 const darkTheme = createTheme({
@@ -36,7 +45,9 @@ const darkTheme = createTheme({
 
 function App() {
   return (
-    <ThemeProvider theme={theme}><Router /></ThemeProvider>
+    <ThemeProvider theme={darkTheme}>
+      <CssBaseline />
+      <Router /></ThemeProvider>
   );
 }
 

@@ -1,4 +1,5 @@
 import { Navigate, useRoutes } from 'react-router-dom';
+import {Home} from './Home';
 import { LoginForm } from './LoginForm';
 
 export  function Router() {
@@ -13,7 +14,7 @@ export  function Router() {
     },
     {
       path: '/home',
-      element: <h1>Home</h1>
+      element: <Home/>
     }
   ]);
 }
