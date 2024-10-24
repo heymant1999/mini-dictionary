@@ -1,0 +1,12 @@
+{
+  "files": {
+    "main.js": "/mini-dictionary/static/js/main.214504ad.js",
+    "static/js/787.4c6d4439.chunk.js": "/mini-dictionary/static/js/787.4c6d4439.chunk.js",
+    "index.html": "/mini-dictionary/index.html",
+    "main.214504ad.js.map": "/mini-dictionary/static/js/main.214504ad.js.map",
+    "787.4c6d4439.chunk.js.map": "/mini-dictionary/static/js/787.4c6d4439.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/js/main.214504ad.js"
+  ]
+}
